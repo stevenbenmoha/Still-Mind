@@ -70,9 +70,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         TextView tv = (TextView) findViewById(R.id.title);
         Typeface face = Typeface.createFromAsset(getAssets(),
-                "fonts/roboto/Roboto-MediumItalic.ttf");
-        tv.setTypeface(face);
-
+        "fonts/roboto/Roboto-Light.ttf");
+         tv.setTypeface(face);
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -90,7 +89,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        TextView mEmailSignInButton = (TextView) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,8 +97,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+       // mLoginFormView = findViewById(R.id.login_form);
+        // mProgressView = findViewById(R.id.login_progress);
     }
 
     private void populateAutoComplete() {
@@ -131,6 +130,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
         return false;
     }
+
 
     /**
      * Callback received when a permissions request has been completed.
@@ -354,5 +354,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
         }
     }
+
 }
 
