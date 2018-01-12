@@ -65,8 +65,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
 
         TextView tv = (TextView) findViewById(R.id.title);
         Typeface face = Typeface.createFromAsset(getAssets(),
@@ -74,7 +76,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
          tv.setTypeface(face);
 
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView = (AutoCompleteTextView) findViewById(R.id.username);
         populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
