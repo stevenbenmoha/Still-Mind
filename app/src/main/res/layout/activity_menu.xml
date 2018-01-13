@@ -2,34 +2,115 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bubble_background"
     android:orientation="vertical">
 
 
-    <FrameLayout
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/login"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="50dp"
-        android:background="@drawable/login_background">
-
-        <TextView
-            android:id="@+id/email_sign_in_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Login now"
-            android:textColor="#c3ffffff" />
-    </FrameLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <TextView
+        android:id="@+id/menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:orientation="vertical">
+        android:layout_marginTop="80dp"
+        android:text="@string/title"
+        android:textColor="#cfffffff"
+        android:textSize="40dp" />
 
-    </LinearLayout>
+
+    <com.github.glomadrian.grav.GravView
+        android:id="@+id/grav2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        app:animationGenerator="com.github.glomadrian.grav.generator.animation.PathAnimator"
+        app:array_colors="@array/bubble"
+        app:ball_from_size="4dp"
+        app:ball_to_size="10dp"
+        app:colorGenerator="com.github.glomadrian.grav.generator.paint.ArrayColorGenerator"
+        app:gravGenerator="com.github.glomadrian.grav.generator.grav.BallGenerator"
+        app:path="@string/circle"
+        app:path_max_duration="10000"
+        app:path_min_duration="6000"
+        app:path_original_height="@integer/circle_original_height"
+        app:path_original_width="@integer/circle_original_width"
+        app:path_variance_from="1dp"
+        app:path_variance_to="5dp"
+        app:pointGenerator="com.github.glomadrian.grav.generator.point.RegularPointGenerator"
+        app:regular_cell_size="150"
+        app:regular_variance="100" />
+
+
+    <info.hoang8f.widget.FButton
+
+
+        android:id="@+id/BeginSession"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/menu"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:width="225dp"
+        android:height="35dp"
+        android:alpha="0.9"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/begin_session"
+        android:textColor="@color/fbutton_color_clouds"
+        android:textSize="16dp"
+        fbutton:buttonColor="@color/fbutton_color_stillmind"
+        fbutton:cornerRadius="5dp"
+        fbutton:shadowColor="@color/fbutton_color_stillmind_shadow"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="3dp" />
+
+    <info.hoang8f.widget.FButton
+
+
+        android:id="@+id/Analytics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/BeginSession"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:width="225dp"
+        android:height="35dp"
+        android:alpha="0.9"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/analytics"
+        android:textColor="@color/fbutton_color_clouds"
+        android:textSize="16dp"
+        fbutton:buttonColor="@color/fbutton_color_stillmind"
+        fbutton:cornerRadius="5dp"
+        fbutton:shadowColor="@color/fbutton_color_stillmind_shadow"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="3dp" />
+
+    <info.hoang8f.widget.FButton
+
+
+        android:id="@+id/Settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Analytics"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:width="225dp"
+        android:height="35dp"
+        android:alpha="0.9"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/settings"
+        android:textColor="@color/fbutton_color_clouds"
+        android:textSize="16dp"
+        fbutton:buttonColor="@color/fbutton_color_stillmind"
+        fbutton:cornerRadius="5dp"
+        fbutton:shadowColor="@color/fbutton_color_stillmind_shadow"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="3dp" />
+
+
+
+
 
 </RelativeLayout>

@@ -1,0 +1,26 @@
+
+This creates nice swirling motion
+
+<com.github.glomadrian.grav.GravView
+        android:id="@+id/grav2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        app:colorGenerator="com.github.glomadrian.grav.generator.paint.ArrayColorGenerator"
+        app:array_colors="@array/bubble"
+        app:pointGenerator="com.github.glomadrian.grav.generator.point.RegularPointGenerator"
+        app:regular_cell_size="100"
+        app:regular_variance="200"
+        app:gravGenerator="com.github.glomadrian.grav.generator.grav.BallGenerator"
+        app:ball_from_size="3dp"
+        app:ball_to_size="8dp"
+    app:animationGenerator="com.github.glomadrian.grav.generator.animation.PathAnimator"
+    app:path_variance_from="1dp"
+    app:path_variance_to="20dp"
+    app:path_min_duration="8000"
+    app:path_max_duration="10000"
+    app:path="@string/circle"
+    app:path_original_width="@integer/circle_original_width"
+    app:path_original_height="@integer/circle_original_height"
+
+        />

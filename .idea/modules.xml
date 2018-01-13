@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/StillMind.iml" filepath="$PROJECT_DIR$/StillMind.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/grav/grav.iml" filepath="$PROJECT_DIR$/grav/grav.iml" />
-      <module fileurl="file://C:\Users\sesa462608\AndroidStudioProjects\StillMind\grav\grav.iml" filepath="C:\Users\sesa462608\AndroidStudioProjects\StillMind\grav\grav.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib1/lib1.iml" filepath="$PROJECT_DIR$/lib1/lib1.iml" />
     </modules>
   </component>

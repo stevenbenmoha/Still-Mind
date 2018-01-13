@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/title"
         android:layout_marginTop="80dp"
-        android:text="Still Mind"
+        android:text="@string/title"
         android:textSize="40dp"
         android:textColor="#cfffffff"
         android:layout_centerHorizontal="true"
@@ -95,7 +95,7 @@
         app:regular_variance="200"
         app:gravGenerator="com.github.glomadrian.grav.generator.grav.BallGenerator"
         app:ball_from_size="15dp"
-        app:ball_to_size="30dp"
+        app:ball_to_size="25dp"
         app:animationGenerators="@array/BubbleAnimations"
         app:side_to_side_min_duration="10000"
         app:side_to_side_max_duration="10000"
@@ -105,6 +105,10 @@
         app:shake_max_duration="20000"
         app:shake_variance="500dp"
         />
+
+
+
+
 
 
 </RelativeLayout>
