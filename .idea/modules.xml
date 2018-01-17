@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/com.github.shinelw.colorarcprogressbar/library/1.0.3/1.0.3.iml" filepath="$PROJECT_DIR$/com.github.shinelw.colorarcprogressbar/library/1.0.3/1.0.3.iml" />
       <module fileurl="file://$PROJECT_DIR$/StillMind.iml" filepath="$PROJECT_DIR$/StillMind.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.github.shinelw.colorarcprogressbar/com.github.shinelw.colorarcprogressbar.iml" filepath="$PROJECT_DIR$/com.github.shinelw.colorarcprogressbar/com.github.shinelw.colorarcprogressbar.iml" />
       <module fileurl="file://$PROJECT_DIR$/grav/grav.iml" filepath="$PROJECT_DIR$/grav/grav.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib1/lib1.iml" filepath="$PROJECT_DIR$/lib1/lib1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.github.shinelw.colorarcprogressbar/library/library.iml" filepath="$PROJECT_DIR$/com.github.shinelw.colorarcprogressbar/library/library.iml" />
     </modules>
   </component>
 </project>

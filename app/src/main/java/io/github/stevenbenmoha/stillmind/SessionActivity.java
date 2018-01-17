@@ -28,12 +28,26 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.ohoussein.playpause.*;
+import com.shinelw.library.ColorArcProgressBar;
+import java.util.Date;
+import android.os.CountDownTimer;
 import java.util.ArrayList;
 import java.util.List;
+import android.os.Handler;
+import android.widget.Toast;
 
 public class SessionActivity extends AppCompatActivity {
+
+
+
+    ColorArcProgressBar progressBar;
+    PlayPauseView view;
+    int ms = 1000;
+    int length = 30000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +55,53 @@ public class SessionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_session);
 
-       // TextView tv = (TextView) findViewById(R.id.menu);
-        //Typeface face = Typeface.createFromAsset(getAssets(),
-        //        "fonts/roboto/Roboto-Light.ttf");
-       // tv.setTypeface(face);
+        progressBar = (ColorArcProgressBar) findViewById(R.id.timer);
+
+         view = (PlayPauseView) findViewById(R.id.play_pause_view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                view.toggle();
+
+                final int interval = 1000;
+                Handler handler = new Handler();
+                Runnable runnable = new Runnable(){
+                    public void run() {
+
+                        new CountDownTimer(length,ms) {
+
+
+                            public void onTick(long millisUntilFinished) {
+
+
+
+                                progressBar.setMaxValues(length/ms);
+
+                                progressBar.setCurrentValues(length-millisUntilFinished);
+                            }
+
+                            public void onFinish() {
+                               progressBar.setUnit("Complete");
+                            }
+
+                        }.start();
+
+                    }
+                };
+
+                handler.postAtTime(runnable, System.currentTimeMillis()+interval);
+                handler.postDelayed(runnable, interval);
+
+
+            }
+        });
+
+
+
     }
+
+
+
 
 
 }

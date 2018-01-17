@@ -9,6 +9,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/com.github.shinelw.colorarcprogressbar" />
+            <option value="$PROJECT_DIR$/com.github.shinelw.colorarcprogressbar/library" />
+            <option value="$PROJECT_DIR$/com.github.shinelw.colorarcprogressbar/library/1.0.3" />
             <option value="$PROJECT_DIR$/grav" />
             <option value="$PROJECT_DIR$/lib1" />
           </set>

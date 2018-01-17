@@ -31,12 +31,18 @@ dependencies {
 
     compile 'com.github.glomadrian:Grav:1.1'
     compile 'com.github.jd-alexander:android-flat-button:v1.1'
+
+    compile 'com.github.shinelw:library:1.0.1'
+
+    compile 'com.github.ohoussein.playpauseview:playpauseview:1.0.2'
+
     implementation files('libs/Grav-1.1-javadoc.jar')
     implementation files('libs/fbutton-1.0.5-javadoc.jar')
 }
 
 repositories {
 
+    mavenCentral()
 
     maven {
         url "http://dl.bintray.com/glomadrian/maven"

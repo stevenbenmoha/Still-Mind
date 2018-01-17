@@ -1,1 +1,1 @@
-include ':app', ':grav', 'lib1'
+include ':app', ':grav', 'lib1', 'com.github.shinelw.colorarcprogressbar:library:1.0.3'
