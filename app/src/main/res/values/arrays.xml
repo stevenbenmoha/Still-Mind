@@ -54,6 +54,13 @@
         <item>com.github.glomadrian.grav.generator.animation.BallSizeAnimator</item>
     </string-array>
 
+
+
+
+    <string-array name="SideToSide">
+        <item>com.github.glomadrian.grav.generator.animation.SideToSideAnimator</item>
+    </string-array>
+
     <string-array name="BallWaveAnimations">
         <item>com.github.glomadrian.grav.generator.animation.SideToSideAnimator</item>
         <item>com.github.glomadrian.grav.generator.animation.ShakeAnimator</item>

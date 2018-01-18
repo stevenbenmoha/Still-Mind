@@ -1,53 +1,36 @@
 package io.github.stevenbenmoha.stillmind;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.graphics.Typeface;
-
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.text.TextUtils;
-import android.view.KeyEvent;
+import android.os.CountDownTimer;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 
-import com.ohoussein.playpause.*;
-import com.shinelw.library.ColorArcProgressBar;
-import java.util.Date;
-import android.os.CountDownTimer;
-import java.util.ArrayList;
-import java.util.List;
-import android.os.Handler;
-import android.widget.Toast;
+import com.github.glomadrian.grav.GravView;
+import com.mikhaellopez.circularprogressbar.CircularProgressBar;
+import com.ohoussein.playpause.PlayPauseView;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 
 public class SessionActivity extends AppCompatActivity {
 
 
 
-    ColorArcProgressBar progressBar;
+    CircularProgressBar progressBar;
+    CountDownTimer cTimer = null;
     PlayPauseView view;
-    int ms = 1000;
-    int length = 30000;
+    TextView timeRemaining;
+    NumberFormat f = new DecimalFormat("00");
+    boolean isPaused = false;
+    long millisLeft;
+    GravView clouds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,53 +38,136 @@ public class SessionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_session);
 
-        progressBar = (ColorArcProgressBar) findViewById(R.id.timer);
+        progressBar = (CircularProgressBar) findViewById(R.id.timer);
 
-         view = (PlayPauseView) findViewById(R.id.play_pause_view);
+        clouds = (GravView) findViewById(R.id.grav);
+        clouds.setVisibility(View.INVISIBLE);
+
+        timeRemaining = (TextView) findViewById(R.id.timeRemaining);
+
+        timeRemaining.setText(f.format(0) + ":" + f.format(0) + ":" + f.format(0));
+
+        TextView tv = (TextView) findViewById(R.id.timeRemaining);
+        Typeface face = Typeface.createFromAsset(getAssets(),
+                "fonts/roboto/Roboto-Light.ttf");
+        tv.setTypeface(face);
+
+        view = (PlayPauseView) findViewById(R.id.play_pause_view);
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 view.toggle();
 
-                final int interval = 1000;
-                Handler handler = new Handler();
-                Runnable runnable = new Runnable(){
-                    public void run() {
 
-                        new CountDownTimer(length,ms) {
+                if (cTimer != null) {
+
+                    if (isPaused) {
 
 
-                            public void onTick(long millisUntilFinished) {
+                        resume();
+                        fadeOutAndHideButton(view);
+                        fadeIn(clouds);
 
-
-
-                                progressBar.setMaxValues(length/ms);
-
-                                progressBar.setCurrentValues(length-millisUntilFinished);
-                            }
-
-                            public void onFinish() {
-                               progressBar.setUnit("Complete");
-                            }
-
-                        }.start();
-
+                    } else {
+                        pause();
+                        fadeInButton(view);
+                        fadeOutAndHideButton(clouds);
                     }
-                };
+                } else {
+                    startTimer(30000);
+                    fadeOutAndHideButton(view);
+                    fadeIn(clouds);
 
-                handler.postAtTime(runnable, System.currentTimeMillis()+interval);
-                handler.postDelayed(runnable, interval);
-
+                }
 
             }
         });
+    }
+
+    private  void startTimer(long sessionLength) {
+        cTimer = new CountDownTimer(sessionLength, 10) {
+            public void onTick(long millisUntilFinished) {
 
 
+                long hour = (millisUntilFinished / 3600000) % 24;
+                long min = (millisUntilFinished / 60000) % 60;
+                long sec = (millisUntilFinished / 1000) % 60;
+
+                timeRemaining.setText(f.format(hour) + ":" + f.format(min) + ":" + f.format(sec));
+
+                double timeLeft = millisUntilFinished/10;
+                float ratio = (float) (100-(100*(timeLeft/3000)));
+                progressBar.setProgress(ratio);
+                millisLeft = millisUntilFinished;
+
+
+            }
+            public void onFinish() {
+
+                view.toggle();
+
+            }
+        };
+        cTimer.start();
 
     }
 
+    /**
+     * Start or Resume the countdown.
+     * @return CountDownTimerPausable current instance
+     */
+    public void resume(){
+        if(isPaused){
+
+            startTimer(millisLeft);
+            isPaused = false;
+        }
+    }
+
+    private void pause()throws IllegalStateException{
+        if(isPaused==false){
+            cTimer.cancel();
+        } else{
+            throw new IllegalStateException("CountDownTimerPausable is already in pause state, start counter before pausing it.");
+        }
+        isPaused = true;
+    }
+    public boolean isPaused() {
+        return isPaused;
+    }
+
+    private void fadeOutAndHideButton(final View view)
+    {
 
 
+        Animation fadeOut = new AlphaAnimation(1f,0f);
+        fadeOut.setInterpolator(new AccelerateInterpolator());
+        fadeOut.setDuration(2000);
+        fadeOut.setFillAfter(true);
 
+        view.startAnimation(fadeOut);
+    }
+
+
+    private void fadeIn(final View view)
+    {
+        Animation fadeIn = new AlphaAnimation(0f,1f);
+        fadeIn.setInterpolator(new DecelerateInterpolator());
+        fadeIn.setDuration(2000);
+        fadeIn.setFillAfter(true);
+        view.startAnimation(fadeIn);
+    }
+
+    private void fadeInButton(final View view)
+    {
+        Animation fadeIn = new AlphaAnimation(.5f,1f);
+        fadeIn.setInterpolator(new DecelerateInterpolator());
+        fadeIn.setDuration(1000);
+        fadeIn.setFillAfter(true);
+        view.startAnimation(fadeIn);
+    }
 
 }

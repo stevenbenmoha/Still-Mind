@@ -7,34 +7,71 @@
     android:orientation="vertical">
 
 
-    <com.ohoussein.playpause.PlayPauseView
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        android:id="@+id/play_pause_view"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="117dp"
-        android:clickable="true"
-        android:foreground="?android:selectableItemBackground"
-        app:fill_color="#FFFF"
-        app:pause_bg="@color/fbutton_color_alizarin"
-        app:play_bg="@color/fbutton_color_emerald" />
 
-    <com.shinelw.library.ColorArcProgressBar
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/timer"
-        app:is_need_content="true"
-        app:front_color1="@color/fbutton_color_stillmind"
-        app:back_width="2dp"
-        app:front_width="4dp"
-        app:total_engle="270"
-        app:is_need_unit="true"
-        app:string_unit="Time Elapsed (seconds)"
-        app:back_color="@android:color/darker_gray"
-        />
+        <com.github.glomadrian.grav.GravView
+            android:id="@+id/grav"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            app:colorGenerator="com.github.glomadrian.grav.generator.paint.ArrayColorGenerator"
+            app:array_colors="@array/bubble"
+            app:pointGenerator="com.github.glomadrian.grav.generator.point.RegularPointGenerator"
+            app:regular_cell_size="300"
+            app:regular_variance="12200"
+            app:gravGenerator="com.github.glomadrian.grav.generator.grav.BallGenerator"
+            app:ball_from_size="10dp"
+            app:ball_to_size="25dp"
+            app:animationGenerators="@array/SideToSide"
+            app:side_to_side_min_duration="10000"
+            app:side_to_side_max_duration="15000"
+            app:side_to_side_direction="leftToRight"
+            />
+
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:id="@+id/timer"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="88dp"
+            app:cpb_background_progressbar_color="#5140bc"
+            app:cpb_background_progressbar_width="4dp"
+            app:cpb_progressbar_color="#e6e8ef"
+            app:cpb_progressbar_width="4dp" />
+
+        <TextView
+            android:id="@+id/timeRemaining"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/play_pause_view"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="21dp"
+            android:text="TextView"
+            android:textSize="24dp"
+            android:textColor="@color/white"/>
+
+        <com.ohoussein.playpause.PlayPauseView
+
+            android:id="@+id/play_pause_view"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignBottom="@+id/timer"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="97dp"
+            android:clickable="true"
+            android:foreground="?android:selectableItemBackground"
+            app:fill_color="#FFFF"
+            app:pause_bg="@color/fbutton_color_stillmind_shadow"
+            app:play_bg="@color/fbutton_color_stillmind">
+
+        </com.ohoussein.playpause.PlayPauseView>
+
+    </RelativeLayout>
+
 
 </RelativeLayout>
 

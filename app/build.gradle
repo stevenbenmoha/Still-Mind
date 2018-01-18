@@ -32,7 +32,7 @@ dependencies {
     compile 'com.github.glomadrian:Grav:1.1'
     compile 'com.github.jd-alexander:android-flat-button:v1.1'
 
-    compile 'com.github.shinelw:library:1.0.1'
+    compile 'com.mikhaellopez:circularprogressbar:1.1.1'
 
     compile 'com.github.ohoussein.playpauseview:playpauseview:1.0.2'
 
