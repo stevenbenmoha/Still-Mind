@@ -41,7 +41,7 @@ public class SessionActivity extends AppCompatActivity {
         progressBar = (CircularProgressBar) findViewById(R.id.timer);
 
         clouds = (GravView) findViewById(R.id.grav);
-        clouds.setVisibility(View.INVISIBLE);
+        clouds.setVisibility(View.VISIBLE);
 
         timeRemaining = (TextView) findViewById(R.id.timeRemaining);
 
@@ -66,7 +66,6 @@ public class SessionActivity extends AppCompatActivity {
 
                     if (isPaused) {
 
-
                         resume();
                         fadeOutAndHideButton(view);
                         fadeIn(clouds);
@@ -79,7 +78,6 @@ public class SessionActivity extends AppCompatActivity {
                 } else {
                     startTimer(30000);
                     fadeOutAndHideButton(view);
-                    fadeIn(clouds);
 
                 }
 
@@ -108,6 +106,9 @@ public class SessionActivity extends AppCompatActivity {
             public void onFinish() {
 
                 view.toggle();
+                fadeIn(view);
+                
+                //save session
 
             }
         };
@@ -165,7 +166,7 @@ public class SessionActivity extends AppCompatActivity {
     {
         Animation fadeIn = new AlphaAnimation(.5f,1f);
         fadeIn.setInterpolator(new DecelerateInterpolator());
-        fadeIn.setDuration(1000);
+        fadeIn.setDuration(10);
         fadeIn.setFillAfter(true);
         view.startAnimation(fadeIn);
     }
