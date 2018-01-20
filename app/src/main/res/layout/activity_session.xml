@@ -12,6 +12,19 @@
         android:layout_height="match_parent">
 
 
+        <ImageView
+            android:id="@+id/sessionSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="13dp"
+            android:layout_marginStart="11dp"
+            android:layout_toEndOf="@+id/timer"
+            android:alpha="0.6"
+            android:clickable="true"
+            fbutton:srcCompat="@drawable/alarmsettings"
+            />
+
         <com.github.glomadrian.grav.GravView
             android:id="@+id/grav"
             android:layout_width="match_parent"

@@ -39,8 +39,8 @@
         app:path_variance_from="1dp"
         app:path_variance_to="5dp"
         app:pointGenerator="com.github.glomadrian.grav.generator.point.RegularPointGenerator"
-        app:regular_cell_size="150"
-        app:regular_variance="100" />
+        app:regular_cell_size="500"
+        app:regular_variance="50" />
 
 
     <info.hoang8f.widget.FButton

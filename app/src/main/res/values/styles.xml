@@ -6,6 +6,18 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
     </style>
+
+    <style name="App.Theme.SessionSettings" parent="android:Theme.Holo.Light.Dialog.NoActionBar" >
+        <item name="android:colorPrimary">@color/holo_light_primary</item>
+        <item name="android:colorBackground">@color/background_holo_light</item>
+    </style>
+
+    <style name="SessionSettings" parent="android:Theme.Holo.Light.Dialog.NoActionBar" >
+        <item name="android:colorPrimary">@color/holo_light_primary_1</item>
+        <item name="android:colorBackground">@color/background_holo_light</item>
+    </style>
+
 
 </resources>

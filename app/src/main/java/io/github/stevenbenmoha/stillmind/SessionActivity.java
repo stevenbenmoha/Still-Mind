@@ -9,6 +9,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.glomadrian.grav.GravView;
@@ -27,10 +28,16 @@ public class SessionActivity extends AppCompatActivity {
     CountDownTimer cTimer = null;
     PlayPauseView view;
     TextView timeRemaining;
+    ImageView sessionSettings;
     NumberFormat f = new DecimalFormat("00");
     boolean isPaused = false;
     long millisLeft;
     GravView clouds;
+    long hour;
+    long min;
+    long sec;
+
+    long sessionLength = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +49,8 @@ public class SessionActivity extends AppCompatActivity {
 
         clouds = (GravView) findViewById(R.id.grav);
         clouds.setVisibility(View.VISIBLE);
+
+        sessionSettings = (ImageView) findViewById(R.id.sessionSettings);
 
         timeRemaining = (TextView) findViewById(R.id.timeRemaining);
 
@@ -76,11 +85,23 @@ public class SessionActivity extends AppCompatActivity {
                         fadeOutAndHideButton(clouds);
                     }
                 } else {
-                    startTimer(30000);
+                    startTimer(sessionLength);
                     fadeOutAndHideButton(view);
 
                 }
 
+            }
+        });
+
+
+        sessionSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // v.setAlpha(1);
+                //startActivity(new Intent(SessionActivity.this, LoginActivity.class));
+
+                showTimePickerDialog(v);
             }
         });
     }
@@ -90,9 +111,9 @@ public class SessionActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
 
 
-                long hour = (millisUntilFinished / 3600000) % 24;
-                long min = (millisUntilFinished / 60000) % 60;
-                long sec = (millisUntilFinished / 1000) % 60;
+                hour = (millisUntilFinished / 3600000) % 24;
+                min = (millisUntilFinished / 60000) % 60;
+                sec = (millisUntilFinished / 1000) % 60;
 
                 timeRemaining.setText(f.format(hour) + ":" + f.format(min) + ":" + f.format(sec));
 
@@ -107,9 +128,7 @@ public class SessionActivity extends AppCompatActivity {
 
                 view.toggle();
                 fadeIn(view);
-                
                 //save session
-
             }
         };
         cTimer.start();
@@ -169,6 +188,18 @@ public class SessionActivity extends AppCompatActivity {
         fadeIn.setDuration(10);
         fadeIn.setFillAfter(true);
         view.startAnimation(fadeIn);
+    }
+
+
+    public void showTimePickerDialog(View v) {
+        InputDialog newFragment = new InputDialog();
+        newFragment.show(getFragmentManager(), "timePicker");
+        setSessionLength(newFragment.getSessionLength());
+    }
+
+    public void setSessionLength(long sesh) {
+
+        sessionLength = sesh;
     }
 
 }

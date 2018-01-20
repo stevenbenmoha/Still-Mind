@@ -30,7 +30,9 @@
     <color name="fbutton_color_concrete">#95a5a6</color>
     <color name="fbutton_color_asbestos">#7f8c8d</color>
     <color name="fbutton_color_transparent">@android:color/transparent</color>
-
+    <color name="holo_light_primary">#e6e8ef</color>
+    <color name="background_holo_light">#dee2f1</color>
+    <color name="holo_light_primary_1">#e6e8ef</color>
 
 
 </resources>
