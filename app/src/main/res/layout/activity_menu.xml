@@ -36,8 +36,8 @@
         app:path_min_duration="6000"
         app:path_original_height="@integer/circle_original_height"
         app:path_original_width="@integer/circle_original_width"
-        app:path_variance_from="1dp"
-        app:path_variance_to="5dp"
+        app:path_variance_from="2dp"
+        app:path_variance_to="7dp"
         app:pointGenerator="com.github.glomadrian.grav.generator.point.RegularPointGenerator"
         app:regular_cell_size="500"
         app:regular_variance="50" />

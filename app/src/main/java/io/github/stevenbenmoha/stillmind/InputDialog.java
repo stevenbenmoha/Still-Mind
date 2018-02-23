@@ -32,6 +32,7 @@ public class InputDialog extends DialogFragment
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 if (view.isShown()) {
+
                     myCalender.set(Calendar.HOUR, hourOfDay);
                     myCalender.set(Calendar.MINUTE, minute);
 
@@ -46,6 +47,7 @@ public class InputDialog extends DialogFragment
             }
 
         };
+
         TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), android.R.style.Theme_Holo_Light_Dialog_NoActionBar, myTimeListener, 0, 0, true);
         timePickerDialog.setTitle("Choose duration (hrs/mins): ");
         timePickerDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);

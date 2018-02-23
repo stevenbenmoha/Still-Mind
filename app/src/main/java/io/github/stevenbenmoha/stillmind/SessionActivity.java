@@ -1,9 +1,11 @@
 package io.github.stevenbenmoha.stillmind;
 
+import android.app.TimePickerDialog;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
@@ -11,6 +13,7 @@ import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.github.glomadrian.grav.GravView;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
@@ -23,7 +26,6 @@ import java.text.NumberFormat;
 public class SessionActivity extends AppCompatActivity {
 
 
-
     CircularProgressBar progressBar;
     CountDownTimer cTimer = null;
     PlayPauseView view;
@@ -33,48 +35,47 @@ public class SessionActivity extends AppCompatActivity {
     boolean isPaused = false;
     long millisLeft;
     GravView clouds;
-    long hour;
-    long min;
+    int hour;
+    int min;
     long sec;
 
-    long sessionLength = 0;
+
+    long hours;
+    long mins;
+
+    long sessionLength = 30000;
+
+    boolean isNewTime = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_session);
 
         progressBar = (CircularProgressBar) findViewById(R.id.timer);
-
         clouds = (GravView) findViewById(R.id.grav);
         clouds.setVisibility(View.VISIBLE);
-
         sessionSettings = (ImageView) findViewById(R.id.sessionSettings);
-
         timeRemaining = (TextView) findViewById(R.id.timeRemaining);
-
         timeRemaining.setText(f.format(0) + ":" + f.format(0) + ":" + f.format(0));
-
         TextView tv = (TextView) findViewById(R.id.timeRemaining);
         Typeface face = Typeface.createFromAsset(getAssets(),
                 "fonts/roboto/Roboto-Light.ttf");
         tv.setTypeface(face);
-
         view = (PlayPauseView) findViewById(R.id.play_pause_view);
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
                 view.toggle();
-
 
                 if (cTimer != null) {
 
                     if (isPaused) {
-
                         resume();
                         fadeOutAndHideButton(view);
                         fadeIn(clouds);
@@ -87,7 +88,6 @@ public class SessionActivity extends AppCompatActivity {
                 } else {
                     startTimer(sessionLength);
                     fadeOutAndHideButton(view);
-
                 }
 
             }
@@ -98,32 +98,72 @@ public class SessionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // v.setAlpha(1);
-                //startActivity(new Intent(SessionActivity.this, LoginActivity.class));
 
-                showTimePickerDialog(v);
+                TimePickerDialog timePickerDialog = new TimePickerDialog(SessionActivity.this, android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker timePicker,
+                                                  int selectedHour, int selectedMinute) {
+
+
+                                hours = timePicker.getHour();
+                                mins = timePicker.getMinute();
+
+
+                                long hourOfDayLong = (1000*3600*hours);
+                                long minuteLong = (1000*60*mins);
+                                long total = hourOfDayLong+minuteLong;
+
+                                sessionLength = total;
+                                isNewTime = true;
+                                timeRemaining.setText(f.format(hours) + ":" + f.format(mins) + ":" + f.format(00));
+                                progressBar.setProgress(0);
+
+                            }
+                        }, hour, min, true);// Yes 24 hour time
+
+
+                timePickerDialog.setTitle("Choose duration (hrs/mins): ");
+                timePickerDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                timePickerDialog.show();
+
+
+
+
             }
         });
+
+
     }
 
-    private  void startTimer(long sessionLength) {
+    private void startTimer(final long sessionLength) {
+
         cTimer = new CountDownTimer(sessionLength, 10) {
             public void onTick(long millisUntilFinished) {
 
 
-                hour = (millisUntilFinished / 3600000) % 24;
-                min = (millisUntilFinished / 60000) % 60;
-                sec = (millisUntilFinished / 1000) % 60;
+               long hourCount = (millisUntilFinished / 3600000) % 24;
+               long minCount = (millisUntilFinished / 60000) % 60;
+               long secCount = (millisUntilFinished / 1000) % 60;
 
-                timeRemaining.setText(f.format(hour) + ":" + f.format(min) + ":" + f.format(sec));
+                timeRemaining.setText(f.format(hourCount) + ":" + f.format(minCount) + ":" + f.format(secCount));
 
-                double timeLeft = millisUntilFinished/10;
-                float ratio = (float) (100-(100*(timeLeft/3000)));
+                double timeLeft = millisUntilFinished / 10;
+
+                double sessionDivisor = sessionLength/10;
+
+
+                float ratio = (float) (100 - (float)(100 * (float)(timeLeft/ sessionDivisor)));
+
+                Log.d("i", "Ratio: " + Double.toString(ratio));
+
                 progressBar.setProgress(ratio);
                 millisLeft = millisUntilFinished;
+                isNewTime = false;
 
 
             }
+
             public void onFinish() {
 
                 view.toggle();
@@ -137,33 +177,40 @@ public class SessionActivity extends AppCompatActivity {
 
     /**
      * Start or Resume the countdown.
+     *
      * @return CountDownTimerPausable current instance
      */
-    public void resume(){
-        if(isPaused){
-
+    public void resume() {
+        if (isPaused && (!isNewTime)) {
             startTimer(millisLeft);
             isPaused = false;
         }
+
+        if (isPaused && isNewTime) {
+            startTimer(sessionLength);
+            isPaused = false;
+        }
+
+
     }
 
-    private void pause()throws IllegalStateException{
-        if(isPaused==false){
+    private void pause() throws IllegalStateException {
+        if (isPaused == false) {
             cTimer.cancel();
-        } else{
+        } else {
             throw new IllegalStateException("CountDownTimerPausable is already in pause state, start counter before pausing it.");
         }
         isPaused = true;
     }
+
     public boolean isPaused() {
         return isPaused;
     }
 
-    private void fadeOutAndHideButton(final View view)
-    {
+    private void fadeOutAndHideButton(final View view) {
 
 
-        Animation fadeOut = new AlphaAnimation(1f,0f);
+        Animation fadeOut = new AlphaAnimation(1f, 0f);
         fadeOut.setInterpolator(new AccelerateInterpolator());
         fadeOut.setDuration(2000);
         fadeOut.setFillAfter(true);
@@ -172,34 +219,20 @@ public class SessionActivity extends AppCompatActivity {
     }
 
 
-    private void fadeIn(final View view)
-    {
-        Animation fadeIn = new AlphaAnimation(0f,1f);
+    private void fadeIn(final View view) {
+        Animation fadeIn = new AlphaAnimation(0f, 1f);
         fadeIn.setInterpolator(new DecelerateInterpolator());
         fadeIn.setDuration(2000);
         fadeIn.setFillAfter(true);
         view.startAnimation(fadeIn);
     }
 
-    private void fadeInButton(final View view)
-    {
-        Animation fadeIn = new AlphaAnimation(.5f,1f);
+    private void fadeInButton(final View view) {
+        Animation fadeIn = new AlphaAnimation(.5f, 1f);
         fadeIn.setInterpolator(new DecelerateInterpolator());
         fadeIn.setDuration(10);
         fadeIn.setFillAfter(true);
         view.startAnimation(fadeIn);
-    }
-
-
-    public void showTimePickerDialog(View v) {
-        InputDialog newFragment = new InputDialog();
-        newFragment.show(getFragmentManager(), "timePicker");
-        setSessionLength(newFragment.getSessionLength());
-    }
-
-    public void setSessionLength(long sesh) {
-
-        sessionLength = sesh;
     }
 
 }
