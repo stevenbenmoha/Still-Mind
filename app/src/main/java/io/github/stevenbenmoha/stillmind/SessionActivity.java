@@ -2,6 +2,7 @@ package io.github.stevenbenmoha.stillmind;
 
 import android.app.TimePickerDialog;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +35,7 @@ public class SessionActivity extends AppCompatActivity {
     NumberFormat f = new DecimalFormat("00");
     boolean isPaused = false;
     long millisLeft;
+    long origTime;
     GravView clouds;
     int hour;
     int min;
@@ -105,10 +107,12 @@ public class SessionActivity extends AppCompatActivity {
                             public void onTimeSet(TimePicker timePicker,
                                                   int selectedHour, int selectedMinute) {
 
-
-                                hours = timePicker.getHour();
-                                mins = timePicker.getMinute();
-
+                                if (Build.VERSION.SDK_INT >= 23 ) {
+                                   hours = timePicker.getHour();
+                                    mins = timePicker.getMinute(); }
+                                else{
+                                    hours = timePicker.getCurrentHour();
+                                    mins = timePicker.getCurrentMinute();}
 
                                 long hourOfDayLong = (1000*3600*hours);
                                 long minuteLong = (1000*60*mins);
@@ -127,9 +131,6 @@ public class SessionActivity extends AppCompatActivity {
                 timePickerDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 timePickerDialog.show();
 
-
-
-
             }
         });
 
@@ -137,6 +138,12 @@ public class SessionActivity extends AppCompatActivity {
     }
 
     private void startTimer(final long sessionLength) {
+
+        if (isNewTime) {
+
+            origTime = sessionLength;
+
+        }
 
         cTimer = new CountDownTimer(sessionLength, 10) {
             public void onTick(long millisUntilFinished) {
@@ -150,10 +157,11 @@ public class SessionActivity extends AppCompatActivity {
 
                 double timeLeft = millisUntilFinished / 10;
 
-                double sessionDivisor = sessionLength/10;
+                double sessionDivisor = origTime/10;
 
+                Log.d("i", "sessionLength: " + Double.toString(sessionLength));
 
-                float ratio = (float) (100 - (float)(100 * (float)(timeLeft/ sessionDivisor)));
+                float ratio = (float) (100.0f - (float)(100.0f * (float)(timeLeft / sessionDivisor)));
 
                 Log.d("i", "Ratio: " + Double.toString(ratio));
 
