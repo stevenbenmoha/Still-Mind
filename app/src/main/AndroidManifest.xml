@@ -35,6 +35,17 @@
             android:label="@string/title_activity_login">
         </activity>
 
+
+        <activity
+            android:name=".AnalyticsActivity"
+            android:label="Analytics">
+        </activity>
+
+        <activity
+            android:name=".SettingsActivity"
+            android:label="Settings">
+        </activity>
+
     </application>
 
 </manifest>

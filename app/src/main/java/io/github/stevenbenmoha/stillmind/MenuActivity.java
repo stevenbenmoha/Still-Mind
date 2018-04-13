@@ -13,6 +13,8 @@ public class MenuActivity extends AppCompatActivity {
 
 
     info.hoang8f.widget.FButton beginSession;
+    info.hoang8f.widget.FButton analyticsButton;
+    info.hoang8f.widget.FButton settingsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,29 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        analyticsButton = (FButton) findViewById(R.id.Analytics);
+
+        analyticsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(MenuActivity.this, AnalyticsActivity.class));
+
+
+            }
+        });
+
+        settingsButton = (FButton) findViewById(R.id.Settings);
+
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(MenuActivity.this, SettingsActivity.class));
+
+
+            }
+        });
 
 
 

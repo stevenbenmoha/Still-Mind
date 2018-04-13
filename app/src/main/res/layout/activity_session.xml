@@ -38,7 +38,7 @@
             app:gravGenerator="com.github.glomadrian.grav.generator.grav.BallGenerator"
             app:pointGenerator="com.github.glomadrian.grav.generator.point.RegularPointGenerator"
             app:regular_cell_size="400"
-            app:regular_variance="150"
+            app:regular_variance="175"
             app:side_to_side_direction="leftToRight"
             app:side_to_side_max_duration="12000"
             app:side_to_side_min_duration="8000" />

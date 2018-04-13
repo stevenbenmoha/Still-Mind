@@ -30,6 +30,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
     compile 'com.github.glomadrian:Grav:1.1'
+
     compile 'com.github.jd-alexander:android-flat-button:v1.1'
 
     compile 'com.mxn.soul:flowingdrawer-core:2.0.0'
@@ -50,7 +51,7 @@ repositories {
     maven {
         url "http://dl.bintray.com/glomadrian/maven"
     }
-    maven { url "https://jitpack.io" }
+    maven { url 'https://jitpack.io' }
 
 
 }

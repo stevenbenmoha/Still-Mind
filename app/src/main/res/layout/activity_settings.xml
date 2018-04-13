@@ -1,0 +1,88 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bubble_background"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <info.hoang8f.widget.FButton
+
+
+            android:id="@+id/SetDefault"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="38dp"
+            android:layout_marginTop="76dp"
+            android:width="120dp"
+            android:height="35dp"
+            android:alpha="0.9"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/set_default_length"
+            android:textColor="@color/fbutton_color_clouds"
+            android:textSize="14dp"
+            fbutton:buttonColor="@color/fbutton_color_stillmind"
+            fbutton:cornerRadius="5dp"
+            fbutton:shadowColor="@color/fbutton_color_stillmind_shadow"
+            fbutton:shadowEnabled="true"
+            fbutton:shadowHeight="3dp" />
+
+        <info.hoang8f.widget.FButton
+
+
+            android:id="@+id/xxx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/SetDefault"
+            android:layout_marginEnd="32dp"
+            android:width="120dp"
+            android:height="35dp"
+            android:alpha="0.9"
+            android:fontFamily="sans-serif-light"
+            android:text="Something Else"
+            android:textColor="@color/fbutton_color_clouds"
+            android:textSize="14dp"
+            fbutton:buttonColor="@color/fbutton_color_stillmind"
+            fbutton:cornerRadius="5dp"
+            fbutton:shadowColor="@color/fbutton_color_stillmind_shadow"
+            fbutton:shadowEnabled="true"
+            fbutton:shadowHeight="3dp" />
+
+
+        <info.hoang8f.widget.FButton
+
+
+            android:id="@+id/Logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="67dp"
+            android:width="120dp"
+            android:height="35dp"
+            android:alpha="0.9"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/logout"
+            android:textColor="@color/fbutton_color_clouds"
+            android:textSize="14dp"
+            fbutton:buttonColor="@color/fbutton_color_alizarin"
+            fbutton:cornerRadius="5dp"
+            fbutton:shadowColor="@color/fbutton_color_pumpkin"
+            fbutton:shadowEnabled="true"
+            fbutton:shadowHeight="3dp" />
+
+
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

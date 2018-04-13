@@ -45,7 +45,7 @@ public class SessionActivity extends AppCompatActivity {
     long hours;
     long mins;
 
-    long sessionLength = 30000;
+    long sessionLength = 0;
 
     boolean isNewTime = false;
 
