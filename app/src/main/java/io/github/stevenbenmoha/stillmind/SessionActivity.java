@@ -35,18 +35,14 @@ public class SessionActivity extends AppCompatActivity {
     NumberFormat f = new DecimalFormat("00");
     boolean isPaused = false;
     long millisLeft;
-    long origTime;
     GravView clouds;
     int hour;
     int min;
     long sec;
-
-
     long hours;
     long mins;
-
-    long sessionLength = 0;
-
+    long sessionLength = 5000;
+    long origTime = 5000;
     boolean isNewTime = false;
 
 
@@ -69,6 +65,7 @@ public class SessionActivity extends AppCompatActivity {
         tv.setTypeface(face);
         view = (PlayPauseView) findViewById(R.id.play_pause_view);
 
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,6 +86,7 @@ public class SessionActivity extends AppCompatActivity {
                     }
                 } else {
                     startTimer(sessionLength);
+
                     fadeOutAndHideButton(view);
                 }
 
@@ -107,21 +105,24 @@ public class SessionActivity extends AppCompatActivity {
                             public void onTimeSet(TimePicker timePicker,
                                                   int selectedHour, int selectedMinute) {
 
-                                if (Build.VERSION.SDK_INT >= 23 ) {
-                                   hours = timePicker.getHour();
-                                    mins = timePicker.getMinute(); }
-                                else{
+                                if (Build.VERSION.SDK_INT >= 23) {
+                                    hours = timePicker.getHour();
+                                    mins = timePicker.getMinute();
+                                } else {
                                     hours = timePicker.getCurrentHour();
-                                    mins = timePicker.getCurrentMinute();}
+                                    mins = timePicker.getCurrentMinute();
+                                }
 
-                                long hourOfDayLong = (1000*3600*hours);
-                                long minuteLong = (1000*60*mins);
-                                long total = hourOfDayLong+minuteLong;
+                                long hourOfDayLong = (1000 * 3600 * hours);
+                                long minuteLong = (1000 * 60 * mins);
+                                long total = hourOfDayLong + minuteLong;
 
                                 sessionLength = total;
                                 isNewTime = true;
                                 timeRemaining.setText(f.format(hours) + ":" + f.format(mins) + ":" + f.format(00));
                                 progressBar.setProgress(0);
+                                view.setClickable(true);
+
 
                             }
                         }, hour, min, true);// Yes 24 hour time
@@ -149,19 +150,19 @@ public class SessionActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
 
 
-               long hourCount = (millisUntilFinished / 3600000) % 24;
-               long minCount = (millisUntilFinished / 60000) % 60;
-               long secCount = (millisUntilFinished / 1000) % 60;
+                long hourCount = (millisUntilFinished / 3600000) % 24;
+                long minCount = (millisUntilFinished / 60000) % 60;
+                long secCount = (millisUntilFinished / 1000) % 60;
 
                 timeRemaining.setText(f.format(hourCount) + ":" + f.format(minCount) + ":" + f.format(secCount));
 
-                double timeLeft = millisUntilFinished / 10;
+                double timeLeft = millisUntilFinished/10;
+                double sessionDivisor = origTime / 10;
 
-                double sessionDivisor = origTime/10;
 
                 Log.d("i", "sessionLength: " + Double.toString(sessionLength));
 
-                float ratio = (float) (100.0f - (float)(100.0f * (float)(timeLeft / sessionDivisor)));
+                float ratio = (float) (100.0f - (float) (100.0f * (float) (timeLeft / sessionDivisor)));
 
                 Log.d("i", "Ratio: " + Double.toString(ratio));
 
@@ -174,6 +175,7 @@ public class SessionActivity extends AppCompatActivity {
 
             public void onFinish() {
 
+                progressBar.setProgress(100);
                 view.toggle();
                 fadeIn(view);
                 //save session
@@ -242,5 +244,16 @@ public class SessionActivity extends AppCompatActivity {
         fadeIn.setFillAfter(true);
         view.startAnimation(fadeIn);
     }
+
+
+    public void saveSession() {
+
+
+
+
+
+    }
+
+
 
 }

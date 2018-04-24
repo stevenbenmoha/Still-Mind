@@ -41,7 +41,8 @@
             app:regular_variance="175"
             app:side_to_side_direction="leftToRight"
             app:side_to_side_max_duration="12000"
-            app:side_to_side_min_duration="8000" />
+            app:side_to_side_min_duration="8000"
+            />
 
         <com.mikhaellopez.circularprogressbar.CircularProgressBar
             android:id="@+id/timer"

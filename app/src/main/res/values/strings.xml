@@ -21,7 +21,7 @@
     <string name="settings">Settings</string>
     <string name="title">Still Mind</string>
     <string name="calendar">Calendar</string>
-    <string name="set_default_length">Set Default Length</string>
+    <string name="set_default_length">Set Default Session Length</string>
     <string name="logout">Log out</string>
 
 
