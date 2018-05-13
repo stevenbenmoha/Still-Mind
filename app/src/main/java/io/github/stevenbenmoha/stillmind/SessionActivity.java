@@ -177,7 +177,11 @@ public class SessionActivity extends AppCompatActivity {
 
                 progressBar.setProgress(100);
                 view.toggle();
+                fadeIn(timeRemaining);
                 fadeIn(view);
+                timeRemaining.setTextSize(16);
+                timeRemaining.setText("Enjoy your peace of mind");
+                fadeOutAndHideButton(view);
                 //save session
             }
         };
